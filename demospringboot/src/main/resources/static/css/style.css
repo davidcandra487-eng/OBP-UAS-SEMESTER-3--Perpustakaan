@@ -1,0 +1,178 @@
+/* style.css */
+
+/* ==================================== */
+/* Style Dasar & Umum (Dipertahankan) */
+/* ==================================== */
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; margin: 0; color: #1f2937; }
+/* Hapus semua style .navbar lama yang biru di sini */
+
+.container { max-width: 1000px; margin: 2rem auto; padding: 0 1rem; }
+
+/* Cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+.card { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); text-align: center; text-decoration: none; color: inherit; transition: all 0.3s ease; border-top: 6px solid #2563eb; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+.card h3 { color: #2563eb; margin: 1rem 0 0.5rem 0; font-size: 1.5rem; }
+.card p { color: #6b7280; }
+
+/* Tables & Forms */
+.box { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+th { background-color: #f9fafb; color: #374151; font-weight: 600; }
+tr:hover { background-color: #f9fafb; }
+
+/* Buttons & Inputs */
+.btn { padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none; color: white; font-weight: 500; display: inline-block; border: none; cursor: pointer; font-size: 0.875rem; }
+.btn-primary { background-color: #2563eb; }
+.btn-primary:hover { background-color: #1d4ed8; }
+.btn-danger { background-color: #ef4444; }
+.btn-danger:hover { background-color: #dc2626; }
+.btn-warning { background-color: #f59e0b; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #374151; }
+.form-control { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; box-sizing: border-box; transition: border-color 0.2s; }
+.form-control:focus { outline: none; border-color: #2563eb; ring: 2px solid #2563eb; }
+
+/* ================================================= */
+/* CSS MENU MELINGKAR BARU (Floating Action Button) */
+/* ================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+/* Mengubah style body bawaan dari menu melingkar agar tidak menimpa background utama */
+/* body { padding: 0; margin: 0; background: #ed9f9f; min-height: 100vh; display: grid; place-items: center; } */
+a {
+    text-decoration: none;
+}
+
+.menu-item,
+.menu-open-button {
+    display: grid;
+    place-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    position: absolute;
+    color: #ffffff;
+    transition: transform ease-out 200ms;
+}
+.menu-open {
+    display: none;
+}
+
+.lines {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -17px;
+    margin-top: -1px;
+    width: 35px;
+    height: 4px;
+    background: #0000cc;
+    border-radius: 1em;
+    transition: transform 200ms;
+}
+.line-1 {
+    transform: translate3d(0, -9px, 0);
+}
+.line-2 {
+    transform: translate3d(0, 0, 0);
+}
+.line-3 {
+    transform: translate3d(0, 9px, 0);
+}
+
+.menu-open:checked + .menu-open-button .line-1 {
+    transform: translate3d(0, 0, 0) rotate(45deg);
+}
+.menu-open:checked + .menu-open-button .line-2 {
+    transform: translate3d(0, 0, 0) scale(0, 1);
+}
+.menu-open:checked + .menu-open-button .line-3 {
+    transform: translate3d(0, 0, 0) rotate(-45deg);
+}
+
+.menu {
+    width: 70px;
+    height: 70px;
+    font-size: 26px;
+}
+.menu-item:hover {
+    background: cyan;
+    color: #000; /* Mengubah warna ikon saat hover */
+    text-shadow: none;
+}
+.menu-item {
+    transition-duration: 0.2s;
+}
+
+.menu-open-button {
+    background: #ffd700;
+    z-index: 2;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-duration: 0.3s;
+    transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+    cursor: pointer;
+}
+.menu-open-button:hover {
+    transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+}
+
+.menu-open:checked + .menu-open-button {
+    transition-timing-function: linear;
+    transition-duration: 0.2s;
+    transform: scale(1, 1) translate3d(0, 0, 0);
+}
+
+/* Mengatur Item Menu Terbuka */
+.menu-open:checked ~ .menu-item {
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.2, 1, 0.2, 1.2);
+}
+
+/* Item ke-3 (Home) */
+/* Menggunakan transform yang lebih sederhana (vertikal) untuk 2 item */
+.menu-open:checked ~ .menu-item:nth-child(3) {
+    /* Home (Posisi Atas) */
+    transform: translate3d(0px, -100px, 0);
+}
+
+/* Item ke-4 (Menu user) */
+.menu-open:checked ~ .menu-item:nth-child(4) {
+    /* Menu User (Posisi Kiri) */
+    transition-delay: 0.08s;
+    /* Menggunakan posisi sudut yang berbeda dari aslinya agar terlihat rapi dengan 2 item */
+    transform: translate3d(-100px, 0, 0); 
+}
+
+/* Menghilangkan item ke-5 dst karena hanya ada 2 item menu */
+
+/* Box Shadow dan Text Shadow */
+.menu-open-button,
+.red,
+.orange {
+    box-shadow: 3px 3px 10px 0 rgba(178, 34, 34, 0.5);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* Warna Item Menu */
+.red {
+    background-color: red;
+}
+.red:hover {
+    color: red;
+    text-shadow: none;
+}
+
+.orange {
+    background-color: orange;
+}
+.orange:hover {
+    color: orange;
+    text-shadow: none;
+}
+

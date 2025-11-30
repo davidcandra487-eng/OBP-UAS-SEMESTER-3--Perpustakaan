@@ -1,0 +1,286 @@
+/* ================================================= */
+/* VARIABEL WARNA BARU */
+/* ================================================= */
+:root {
+  --light-gray: #d6d2c8;
+  --dark-gray: #55524e;
+  --gray: #9b9484;
+  --dark-blue: #2b293e;
+  --light-blue: #35b7da;
+}
+
+/* ================================================= */
+/* STYLE DASAR & KOMPONEN (DIADAPTASI) */
+/* ================================================= */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fef9ee; /* Warna latar belakang baru */
+  margin: 0;
+  color: #1f2937;
+  /* Tambahkan min-height agar #computer bisa di tengah dengan benar */
+  min-height: 100vh; 
+}
+
+/* Style card dan grid dipertahankan agar tata letak konten koleksi tetap berfungsi */
+.container { 
+    max-width: 1000px; 
+    margin: 2rem auto; 
+    padding: 0 1rem; 
+}
+
+.card-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 2rem; 
+    margin-top: 2rem; 
+    position: relative; 
+    z-index: 5;
+}
+
+.card { 
+    background: white; 
+    padding: 2rem; 
+    border-radius: 1rem; 
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); 
+    text-align: center; 
+    text-decoration: none; 
+    color: inherit; 
+    transition: all 0.3s ease; 
+    border-top: 6px solid #2563eb; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.card:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); 
+}
+
+.card h3 { 
+    color: #2563eb; 
+    margin: 1rem 0 0.5rem 0; 
+    font-size: 1.5rem; 
+}
+
+.card p { 
+    color: #6b7280; 
+}
+
+/* Style Tables, Buttons & Inputs */
+.box { background: white; padding: 2rem; border-radius: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
+th { background-color: #f9fafb; color: #374151; font-weight: 600; }
+tr:hover { background-color: #f9fafb; }
+.btn { padding: 0.5rem 1rem; border-radius: 0.5rem; text-decoration: none; color: white; font-weight: 500; display: inline-block; border: none; cursor: pointer; font-size: 0.875rem; }
+.btn-primary { background-color: #2563eb; }
+.btn-primary:hover { background-color: #1d4ed8; }
+.btn-danger { background-color: #ef4444; }
+.btn-danger:hover { background-color: #dc2626; }
+.btn-warning { background-color: #f59e0b; }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: #374151; }
+.form-control { width: 100%; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.5rem; box-sizing: border-box; transition: border-color 0.2s; }
+.form-control:focus { outline: none; border-color: #2563eb; ring: 2px solid #2563eb; }
+
+
+/* ================================================= */
+/* ANIMASI KOMPUTER (DENGAN POSISI BARU) */
+/* ================================================= */
+#computer {
+  position: absolute;
+  width: 340px;
+  height: 300px;
+  /* PERUBAHAN UTAMA: DITURUNKAN DARI 50% MENJADI 60% */
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background:
+    /* Bottom Section */
+    repeating-linear-gradient(90deg, var(--gray) 0 10px, var(--light-gray) 10px 18px) 258px 236px / 64px 10px,
+    repeating-linear-gradient(90deg, var(--dark-gray) 0 10px, var(--light-gray) 10px 18px) 258px 246px / 64px 38px,
+    linear-gradient(var(--dark-gray), var(--dark-gray)) 166px 264px / 10px 14px,
+    linear-gradient(var(--light-gray) 10px, var(--dark-gray) 10px) 144px 248px / 80px 20px,
+    linear-gradient(90deg, var(--dark-gray) 10px, var(--gray) 10px) 124px 236px / 110px 48px,
+    linear-gradient(90deg, var(--gray) 10px, var(--light-gray) 10px) 90px 230px / 250px 60px,
+    linear-gradient(90deg, var(--gray) 10px, var(--light-gray) 10px) 100px 220px / 240px 80px,
+    linear-gradient(var(--dark-gray), var(--dark-gray)) 10px bottom / 330px 80px,
+    linear-gradient(var(--dark-gray), var(--dark-gray)) left bottom / 320px 70px,
+    
+    /* Top Section */
+    linear-gradient(90deg, var(--gray) 18px, var(--light-gray) 18px 26px, var(--gray) 26px 36px, var(--dark-gray) 36px 122px, var(--light-gray) 122px 160px, var(--gray) 160px) 120px 180px / 170px 10px,
+    linear-gradient(var(--gray) 10px, var(--dark-blue) 10px 150px, var(--gray) 150px) 130px 10px / 150px 160px,
+    linear-gradient(90deg, var(--gray) 10px, var(--dark-blue) 10px 180px, var(--gray) 180px) 110px 30px / 190px 120px,
+    linear-gradient(var(--gray), var(--gray)) 120px 20px / 170px 140px,
+    linear-gradient(var(--light-gray), var(--light-gray)) 110px top / 190px 200px,
+    linear-gradient(90deg, var(--gray) 10px, var(--light-gray) 10px) 90px 10px / 220px 180px,
+    linear-gradient(var(--gray), var(--gray)) 100px top / 200px 200px,
+    linear-gradient(var(--dark-gray), var(--dark-gray)) 40px top / 260px 200px,
+    linear-gradient(90deg, var(--dark-gray) 50%, var(--light-gray) 50%) 30px 10px / 280px 180px,
+
+    /* Back section */
+    linear-gradient(90deg, var(--dark-gray) 96px, var(--gray) 96px) 70px 210px / 216px 14px,
+    linear-gradient(var(--dark-gray), var(--dark-gray)) 90px 190px / 178px 30px;
+  background-repeat: no-repeat;
+  z-index: 1; 
+}
+
+#computer::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: 95px;
+  left: 175px;
+  background-color: var(--light-blue);
+  animation: hello 3500ms linear infinite forwards alternate;
+}
+
+@keyframes hello {
+  0%, 18% {
+    box-shadow:
+    0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 40px -30px 0 var(--light-blue), 40px -20px 0 var(--light-blue), 10px -30px 0 var(--light-blue), 10px -20px 0 var(--light-blue), 50px 0 0 var(--light-blue), 40px 10px 0 var(--light-blue), 30px 10px 0 var(--light-blue), 20px 10px 0 var(--light-blue), 10px 10px 0 var(--light-blue);
+  }
+  24%, 38% {
+    box-shadow:
+    0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 50px -30px 0 var(--light-blue), 40px -20px 0 var(--light-blue), 0 -30px 0 var(--light-blue), 10px -20px 0 var(--light-blue), 50px 0 0 var(--light-blue), 40px 10px 0 var(--light-blue), 30px 0 0 var(--light-blue), 20px 10px 0 var(--light-blue), 10px 10px 0 var(--light-blue);
+  }
+  44%, 58% {
+    box-shadow:
+    0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 50px -30px 0 var(--light-blue), 50px 0 0 var(--light-blue), 40px 10px 0 var(--light-blue), 30px -20px 0 var(--light-blue), 30px 0 0 var(--light-blue), 30px 10px 0 var(--light-blue), 10px -10px var(--light-blue), 0 -30px 0 var(--light-blue), 0 -20px 0 var(--light-blue), 0 10px 0 var(--light-blue);
+  }
+  64%, 78% {
+    box-shadow:
+    0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 0 0 0 var(--light-blue), 50px -30px 0 var(--light-blue), 50px 0 0 var(--light-blue), 50px 10px 0 var(--light-blue), 30px -30px 0 var(--light-blue), 30px -20px 0 var(--light-blue), 30px 0 0 var(--light-blue), 30px 10px 0 var(--light-blue), 10px -10px var(--light-blue), 0 -30px 0 var(--light-blue), 0 -20px 0 var(--light-blue), 0 10px 0 var(--light-blue);
+  }
+  84%, 100% {
+    box-shadow:
+    50px -30px 0 var(--light-blue), 50px -10px 0 var(--light-blue), 50px 0 0 var(--light-blue), 50px 10px 0 var(--light-blue), 30px -30px 0 var(--light-blue), 30px -20px 0 var(--light-blue), 30px -10px 0 var(--light-blue), 30px 0 0 var(--light-blue), 30px 10px 0 var(--light-blue), 20px -10px 0 var(--light-blue), 10px -10px 0 var(--light-blue), 0 -30px 0 var(--light-blue), 0 -20px 0 var(--light-blue), 0 -10px var(--light-blue), 0 10px 0 var(--light-blue);
+  }
+}
+
+/* ================================================= */
+/* CSS MENU MELINGKAR (Floating Action Button/FAB) */
+/* ================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+.menu-item,
+.menu-open-button {
+    display: grid;
+    place-items: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    position: absolute;
+    color: #ffffff;
+    transition: transform ease-out 200ms;
+}
+.menu-open {
+    display: none;
+}
+
+.lines {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -17px;
+    margin-top: -1px;
+    width: 35px;
+    height: 4px;
+    background: #0000cc;
+    border-radius: 1em;
+    transition: transform 200ms;
+}
+.line-1 {
+    transform: translate3d(0, -9px, 0);
+}
+.line-2 {
+    transform: translate3d(0, 0, 0);
+}
+.line-3 {
+    transform: translate3d(0, 9px, 0);
+}
+
+.menu-open:checked + .menu-open-button .line-1 {
+    transform: translate3d(0, 0, 0) rotate(45deg);
+}
+.menu-open:checked + .menu-open-button .line-2 {
+    transform: translate3d(0, 0, 0) scale(0, 1);
+}
+.menu-open:checked + .menu-open-button .line-3 {
+    transform: translate3d(0, 0, 0) rotate(-45deg);
+}
+
+.menu {
+    width: 70px;
+    height: 70px;
+    font-size: 26px;
+}
+.menu-item:hover {
+    background: cyan;
+    color: #000;
+    text-shadow: none;
+}
+.menu-item {
+    transition-duration: 0.2s;
+}
+
+.menu-open-button {
+    background: #ffd700;
+    z-index: 2;
+    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-duration: 0.3s;
+    transform: scale(1.1, 1.1) translate3d(0, 0, 0);
+    cursor: pointer;
+}
+.menu-open-button:hover {
+    transform: scale(1.2, 1.2) translate3d(0, 0, 0);
+}
+
+.menu-open:checked + .menu-open-button {
+    transition-timing-function: linear;
+    transition-duration: 0.2s;
+    transform: scale(1, 1) translate3d(0, 0, 0);
+}
+
+/* Mengatur Item Menu Terbuka */
+.menu-open:checked ~ .menu-item {
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.2, 1, 0.2, 1.2);
+}
+
+/* Item ke-3 (Home) */
+.menu-open:checked ~ .menu-item:nth-child(3) {
+    transform: translate3d(0px, -100px, 0);
+}
+
+/* Item ke-4 (Menu koleksi) */
+.menu-open:checked ~ .menu-item:nth-child(4) {
+    transition-delay: 0.08s;
+    transform: translate3d(-100px, 0, 0);
+}
+
+/* Box Shadow dan Text Shadow */
+.menu-open-button,
+.red,
+.orange {
+    box-shadow: 3px 3px 10px 0 rgba(178, 34, 34, 0.5);
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* Warna Item Menu */
+.red {
+    background-color: red;
+}
+
+.orange {
+    background-color: orange;
+}

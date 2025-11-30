@@ -1,0 +1,99 @@
+/* --- MODERN NAV BAR STYLES --- */
+
+/* Reset dasar */
+.navbar, .navbar a, .navbar li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: #212121; /* Dark Background */
+    color: #f0f0f0; /* Light text color */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Section */
+.nav-left .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #4CAF50; /* Highlight color (Green/Success) */
+    letter-spacing: 0.5px;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 25px; /* Spacing between menu items */
+}
+
+.nav-menu li a {
+    text-decoration: none;
+    color: #cccccc;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Hover Effect: Bottom Line Grow */
+.nav-menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background-color: #4CAF50; /* Highlight color */
+    transition: width 0.3s ease;
+}
+
+.nav-menu li a:hover {
+    color: #ffffff;
+}
+
+.nav-menu li a:hover::after {
+    width: 100%; /* Line grows on hover */
+}
+
+/* Right Section */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Welcome Message */
+.welcome-seller {
+    color: #B0BEC5; /* Soft gray color */
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+/* Logout Button */
+.logout-button {
+    text-decoration: none;
+    background-color: #E53935; /* Red for Logout/Danger */
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: #C62828; /* Darker red on hover */
+    transform: translateY(-1px); /* Slight lift effect */
+}

@@ -1,0 +1,161 @@
+/* Google fonts - Open Sans */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+/* colors */
+:root {
+    --blue: rgb(79, 192, 210);
+    --green: rgb(82, 210, 154);
+    --yellow: rgba(231, 196, 104, 0.7);
+    --orange: rgb(235, 118, 85);
+    --dark-bg: rgba(0, 0, 0, 0.9);
+    --light-bg: rgba(255, 255, 255, 0.1);
+    --text: rgba(255, 255, 255, 0.9);
+    --hover-bg: rgba(0, 0, 0, 0.7); /* Custom for hover */
+}
+
+/* links */
+.mahasiswa-row a, .dosen-row a { /* Tambahkan .dosen-row a */
+    text-decoration: none;
+    transition: color 0.2s ease-out;
+    color: var(--blue); /* Default link color for rows */
+}
+
+.mahasiswa-row a:hover, .dosen-row a:hover { /* Tambahkan .dosen-row a:hover */
+    color: rgb(47, 115, 126); /* Darker blue for hover */
+}
+
+
+/* wrapper */
+.wrapper {
+    width: 100%;
+    max-width: 1200px; /* Lebar lebih besar untuk menampung lebih banyak kolom */
+    margin: 20px auto 100px auto;
+    padding: 0;
+    background: var(--light-bg);
+    color: var(--text);
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* lists */
+.row ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.row ul li {
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    list-style: none;
+    display: inline-block;
+    /* 7 kolom: No, ID User, Nama, NIM, Jurusan, Semester, Aksi */
+    /* Sesuaikan lebar kolom agar sesuai */
+    width: 14.28%; /* 100% / 7 */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Penyesuaian lebar kolom spesifik (UNTUK MAHASISWA - 8 KOLOM: No, ID User, Nama, NIM, Jurusan, Semester, Alamat, No. HP) */
+.mahasiswa-row .title ul li:nth-child(1), .mahasiswa-row .row ul li:nth-child(1) { width: 5%; } /* No */
+.mahasiswa-row .title ul li:nth-child(2), .mahasiswa-row .row ul li:nth-child(2) { width: 10%; } /* ID User */
+.mahasiswa-row .title ul li:nth-child(3), .mahasiswa-row .row ul li:nth-child(3) { width: 20%; } /* Nama */
+.mahasiswa-row .title ul li:nth-child(4), .mahasiswa-row .row ul li:nth-child(4) { width: 10%; } /* NIM */
+.mahasiswa-row .title ul li:nth-child(5), .mahasiswa-row .row ul li:nth-child(5) { width: 15%; } /* Jurusan */
+.mahasiswa-row .title ul li:nth-child(6), .mahasiswa-row .row ul li:nth-child(6) { width: 10%; } /* Semester */
+.mahasiswa-row .title ul li:nth-child(7), .mahasiswa-row .row ul li:nth-child(7) { width: 15%; } /* Alamat */
+.mahasiswa-row .title ul li:nth-child(8), .mahasiswa-row .row ul li:nth-child(8) { width: 15%; } /* No. HP */
+
+
+/* Penyesuaian lebar kolom spesifik (UNTUK DOSEN - 8 KOLOM: No, ID User, Nama, NIP, Fakultas, Jabatan, Alamat, No. HP) */
+.dosen-row .title ul li:nth-child(1), .dosen-row .row ul li:nth-child(1) { width: 5%; } /* No */
+.dosen-row .title ul li:nth-child(2), .dosen-row .row ul li:nth-child(2) { width: 10%; } /* ID User */
+.dosen-row .title ul li:nth-child(3), .dosen-row .row ul li:nth-child(3) { width: 20%; } /* Nama */
+.dosen-row .title ul li:nth-child(4), .dosen-row .row ul li:nth-child(4) { width: 10%; } /* NIP */
+.dosen-row .title ul li:nth-child(5), .dosen-row .row ul li:nth-child(5) { width: 15%; } /* Fakultas */
+.dosen-row .title ul li:nth-child(6), .dosen-row .row ul li:nth-child(6) { width: 15%; } /* Jabatan */
+.dosen-row .title ul li:nth-child(7), .dosen-row .row ul li:nth-child(7) { width: 15%; } /* Alamat */
+.dosen-row .title ul li:nth-child(8), .dosen-row .row ul li:nth-child(8) { width: 10%; } /* No. HP */
+
+
+.title ul li {
+    padding: 15px 13px;
+    font-weight: bold;
+}
+.row ul li {
+    padding: 10px 10px;
+    white-space: nowrap; /* Mencegah wrap pada kolom */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* rows */
+.row {
+    padding: 10px 0;
+    height: auto;
+    font-size: 0;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+    border-top: 1px solid rgba(0, 0, 0, 1);
+}
+
+.row:hover {
+    background-color: var(--hover-bg);
+    height: 65px; /* Sesuaikan tinggi saat hover untuk menampilkan more-content */
+}
+
+.title {
+    padding: 10px 0;
+    height: auto;
+    font-size: 0;
+    background-color: var(--light-bg);
+    border-left: 3px solid var(--text);
+    border-top: none;
+}
+.title:hover {
+    height: auto;
+    background-color: var(--light-bg);
+    border-left: 3px solid var(--text);
+}
+
+.mahasiswa-row {
+    border-left: 3px solid rgba(79, 192, 210, 0.7); /* Darker blue */
+}
+.mahasiswa-row:hover {
+    border-left: 3px solid var(--blue);
+}
+
+/* Penambahan styling untuk baris Dosen */
+.dosen-row {
+    border-left: 3px solid rgba(82, 210, 154, 0.7); /* Hijau */
+}
+.dosen-row:hover {
+    border-left: 3px solid var(--green);
+}
+
+
+/* more content */
+ul.more-content {
+    position: relative;
+    top: 5px; /* Sesuaikan posisi agar muncul saat hover */
+    display: block;
+    padding: 0 10px;
+}
+
+ul.more-content li {
+    position: relative;
+    font-size: 12px;
+    margin: 0;
+    padding: 5px 13px;
+    display: block;
+    height: auto;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.4); /* Darker text */
+    text-align: left;
+    white-space: normal;
+}

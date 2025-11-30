@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu Koleksi</title>
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cmp.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <style>
+        /* CSS Tambahan untuk penempatan Floating Action Button (FAB) */
+        .menu-wrapper {
+            position: fixed;
+            bottom: 30px; /* Jarak dari bawah */
+            right: 30px; /* Jarak dari kanan */
+            z-index: 100; /* Pastikan FAB berada di atas konten lain */
+        }
+        
+        /* Memberi jarak yang cukup untuk konten utama setelah navbar lama dihapus */
+        .container {
+            margin-top: 5rem; /* Menambah jarak dari atas halaman */
+            z-index: 10; /* Pastikan konten card di atas animasi komputer */
+            position: relative;
+        }
+        
+        /* Gaya tambahan untuk ikon di dalam h3 (agar rapi) */
+        .card h3 i {
+            margin-right: 5px; 
+        }
+
+        /* Karena navbar lama dihapus, Anda mungkin perlu mengatur kembali margin-top pada body atau container jika tata letak terlihat terlalu ke atas */
+        /* Style card dipertahankan */
+        
+        /* Tambahkan Ikon pada card koleksi dan Border color spesifik */
+        .card.buku h3 {
+            color: #2563eb; /* Warna default dari style.css */
+        }
+        .card.jurnal {
+            border-top: 6px solid #db2777;
+        }
+        .card.jurnal h3 {
+            color: #db2777;
+        }
+        .card.majalah {
+            border-top: 6px solid #dc2626;
+        }
+        .card.majalah h3 {
+            color: #dc2626;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div id="computer"></div> 
+    
+    <div class="menu-wrapper">
+        <nav class="menu">
+            <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
+            
+            <label class="menu-open-button" for="menu-open">
+                <span class="lines line-1"></span>
+                <span class="lines line-2"></span>
+                <span class="lines line-3"></span>
+            </label>
+
+            <a href="/" class="menu-item red" title="Home"> <i class="fa fa-home"></i> </a>
+            
+            <a href="/koleksi" class="menu-item orange" title="Menu koleksi"> <i class="fa fa-book"></i> </a>
+            
+            </nav>
+    </div>
+    
+    <div class="container">
+        
+        <div class="card-grid">
+            
+            <a href="/koleksi/buku" class="card buku">
+                <h3><i class="fa fa-book"></i> Buku</h3>
+                <p>Lihat koleksi buku.</p>
+            </a>
+            
+            <a href="/koleksi/jurnal" class="card jurnal">
+                <h3><i class="fa fa-file-text-o"></i> Jurnal</h3>
+                <p>Lihat koleksi jurnal ilmiah.</p>
+            </a>
+            
+            <a href="/koleksi/majalah" class="card majalah">
+                <h3><i class="fa fa-newspaper-o"></i> Majalah</h3>
+                <p>Lihat koleksi majalah.</p>
+            </a>
+            
+        </div>
+    </div>
+    
+    </body>
+</html>

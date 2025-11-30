@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Halaman Buku</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/button-3d.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+
+    <div class="first-box">
+        <h2>Daftar Buku</h2>
+
+        <div th:if="${message}" class="success-message" th:text="${message}"></div>
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+        <section class="wrapper">
+            <main class="row title">
+                <ul>
+                    <li>No</li>
+                    <li>ISBN</li>
+                    <li>Judul</li>
+                    <li>Status</li>
+                    <li>Penulis</li>
+                    <li>Kode Koleksi</li>
+                    <li>Lokasi Rak</li>
+                    <li>Tahun Terbit</li>
+                </ul>
+            </main>
+
+            <article class="row buku-row" th:each="b, no : ${listBuku}">
+                <ul>
+                    <li th:text="${no.count}"></li>
+
+                    <li>
+                        <a th:href="@{/buku?id={id}(id=${b.getIsbn()})}" th:text="${b.getIsbn()}"></a>
+                    </li>
+
+                    <li th:text="${b.getJudul()}"></li>
+
+                    <li th:text="${b.getStatus()}"></li>
+
+                    <li th:text="${b.getPenulis()}"></li>
+
+                    <li th:text="${b.getKodeKoleksi()}"></li>
+
+                    <li th:text="${b.getLokasiRak()}"></li>
+
+                    <li th:text="${b.getTahunTerbit()}"></li>
+                </ul>
+            </article>
+        </section>
+    </div>
+
+    <div class="second-box">
+        <div id="feedback-form">
+
+            <h2 class="header"
+                th:text="${bukuRec != null and bukuRec.getIsbn() != null and !bukuRec.getIsbn().isEmpty()} ? 'Form Edit Buku (ISBN: ' + ${bukuRec.getIsbn()} + ')' : 'Form Tambah Buku'">
+                Form Management Buku
+            </h2>
+
+            <form th:action="@{/buku/save}" method="post" th:object="${bukuRec}" class="form-group">
+
+                <label for="isbn" class="form-label">ISBN</label>
+                <input type="text" id="isbn" name="isbn" th:value="${bukuRec?.getIsbn()}"
+                    th:readonly="${bukuRec?.getIsbn() != null and !bukuRec.getIsbn().isEmpty()}" required />
+
+                <label for="judul" class="form-label">Judul</label>
+                <input type="text" id="judul" name="judul" th:value="${bukuRec?.getJudul()}" required />
+
+                <label for="status" class="form-label">Status</label>
+                <input type="text" id="status" name="status" th:value="${bukuRec?.getStatus()}" required />
+
+                <label for="penulis" class="form-label">Penulis</label>
+                <input type="text" id="penulis" name="penulis" th:value="${bukuRec?.getPenulis()}" />
+
+                <label for="kodeKoleksi" class="form-label">Kode Koleksi</label>
+                <input type="text" id="kodeKoleksi" name="kodeKoleksi" th:value="${bukuRec?.getKodeKoleksi()}" />
+
+                <label for="lokasiRak" class="form-label">Lokasi Rak</label>
+                <input type="text" id="lokasiRak" name="lokasiRak" th:value="${bukuRec?.getLokasiRak()}" />
+
+                <label for="tahunTerbit" class="form-label">Tahun Terbit</label>
+                <input type="number" id="tahunTerbit" name="tahunTerbit" th:value="${bukuRec?.getTahunTerbit()}" />
+
+                <div class="action-buttons">
+                    <ul>
+                        <li>
+                            <button type="submit" name="add" class="action-link" id="btn-add">
+                                <i class="fa fa-plus-circle"></i><span>ADD</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button type="submit" name="edit" class="action-link" id="btn-edit">
+                                <i class="fa fa-pencil"></i><span>EDIT</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button type="submit" name="delete" class="action-link" id="btn-delete"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus data buku dengan ISBN ' + this.form.isbn.value + '?');">
+                                <i class="fa fa-trash-o"></i><span>DELETE</span>
+                            </button>
+                        </li>
+                        <li>
+                            <a th:href="@{/buku}" class="action-link" id="btn-new">
+                                <i class="fa fa-file-o"></i><span>NEW FORM</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+
+</html>

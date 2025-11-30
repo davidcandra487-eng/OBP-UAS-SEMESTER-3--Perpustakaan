@@ -1,0 +1,134 @@
+/* Aturan global untuk body */
+body {
+    /* Background baru dari efek bintang */
+    background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+    font-family: 'Open Sans', sans-serif;
+    color: rgba(255, 255, 255, 0.9); /* $text */
+    min-height: 100vh;
+    overflow-x: hidden; /* Mencegah scroll horizontal karena rotasi bintang */
+    overflow-y: scroll;
+}
+
+/* Styling untuk dua box utama */
+.first-box, .second-box {
+    margin: 20px auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px; /* Sesuaikan dengan lebar wrapper di table.css */
+    position: relative; /* Penting: memastikan box tampil di atas bintang */
+    z-index: 2; /* Penting: memastikan box tampil di atas bintang */
+}
+
+.first-box h2, .second-box h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ---------------------------------------------------------------------------------- */
+/* STYLING BINTANG JATUH (SHOOTING STARS) */
+/* ---------------------------------------------------------------------------------- */
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-45deg);
+    z-index: 1; /* Di bawah konten utama */
+}
+
+.star {
+    /* Variabel CSS Default */
+    --star-color: rgb(255, 255, 255);
+    --star-tail-length: 6em;
+    --star-tail-height: 2px;
+    --star-width: calc(var(--star-tail-length) / 6);
+    --fall-duration: 9s;
+    --tail-fade-duration: var(--fall-duration);
+
+    position: absolute;
+    top: var(--top-offset, 50vh); /* Default Top Offset */
+    left: 0;
+    width: var(--star-tail-length);
+    height: var(--star-tail-height);
+    color: var(--star-color);
+    background: linear-gradient(45deg, currentColor, transparent);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 6px currentColor);
+    transform: translate3d(104em, 0, 0);
+    animation: fall var(--fall-duration) var(--fall-delay, 0s) linear infinite, 
+               tail-fade var(--tail-fade-duration) var(--fall-delay, 0s) ease-out infinite;
+}
+
+/* Mengatur properti setiap bintang (Karena SASS random tidak tersedia, 
+   kita gunakan nilai hardcoded untuk variasi visual) */
+.star:nth-child(1) { --star-tail-length: 5em; --top-offset: 10vh; --fall-duration: 7s; --fall-delay: 0.5s; }
+.star:nth-child(2) { --star-tail-length: 7em; --top-offset: 50vh; --fall-duration: 10s; --fall-delay: 2s; }
+.star:nth-child(3) { --star-tail-length: 6em; --top-offset: 90vh; --fall-duration: 8s; --fall-delay: 4s; }
+.star:nth-child(4) { --star-tail-length: 8em; --top-offset: 20vh; --fall-duration: 12s; --fall-delay: 6s; }
+.star:nth-child(5) { --star-tail-length: 5.5em; --top-offset: 80vh; --fall-duration: 9s; --fall-delay: 8s; }
+/* Ulangi untuk bintang lainnya */
+.star:nth-child(6) { --star-tail-length: 6.5em; --top-offset: 15vh; --fall-duration: 7.5s; --fall-delay: 1.2s; }
+.star:nth-child(7) { --star-tail-length: 4.5em; --top-offset: 65vh; --fall-duration: 11s; --fall-delay: 3.5s; }
+.star:nth-child(8) { --star-tail-length: 7.2em; --top-offset: 30vh; --fall-duration: 9.5s; --fall-delay: 5.8s; }
+.star:nth-child(9) { --star-tail-length: 5.8em; --top-offset: 5vh; --fall-duration: 8.5s; --fall-delay: 7.1s; }
+.star:nth-child(10) { --star-tail-length: 7.8em; --top-offset: 95vh; --fall-duration: 13s; --fall-delay: 9.9s; }
+/* Tambahkan lebih banyak variasi jika perlu, menggunakan nilai acak */
+
+@media screen and (max-width: 750px) {
+    /* Untuk mobile, hilangkan tail-fade untuk performa yang lebih baik */
+    .star {
+        animation: fall var(--fall-duration) var(--fall-delay, 0s) linear infinite;
+    }
+}
+
+.star::before, .star::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: calc(var(--star-width) / -2);
+    width: var(--star-width);
+    height: 100%;
+    background: linear-gradient(45deg, transparent, currentColor, transparent);
+    border-radius: inherit;
+    animation: blink 2s linear infinite;
+}
+
+.star::before {
+    transform: rotate(45deg);
+}
+
+.star::after {
+    transform: rotate(-45deg);
+}
+
+@keyframes fall {
+    to {
+        transform: translate3d(-30em, 0, 0);
+    }
+}
+
+@keyframes tail-fade {
+    0%, 50% {
+        width: var(--star-tail-length);
+        opacity: 1;
+    }
+
+    70%, 80% {
+        width: 0;
+        opacity: 0.4;
+    }
+
+    100% {
+        width: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.6;
+    }
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Halaman Mahasiswa</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" /> 
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/button-3d.css}" />
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+
+    <div class="first-box">
+        
+        <h2>Daftar Mahasiswa</h2>
+        
+        <div th:if="${message}" class="success-message" th:text="${message}"></div>
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+        <section class="wrapper">
+            <main class="row title">
+                <ul>
+                    <li>No</li>
+                    <li>ID User</li>
+                    <li>Nama</li>
+                    <li>NIM</li>
+                    <li>Jurusan</li>
+                    <li>Semester</li> 
+                    <li>Alamat</li>
+                    <li>No. HP</li>
+                    </ul>
+            </main>
+            
+            <article class="row mahasiswa-row" th:each="mhs, no : ${listMahasiswa}">
+                <ul>
+                    <li th:text="${no.count}"></li>
+                    <li>
+                        <a th:href="@{/user/mahasiswa?id={id}(id=${mhs.getIdUser()})}" th:text="${mhs.getIdUser()}"></a>
+                    </li>
+                    <li th:text="${mhs.getNama()}"></li>
+                    <li>
+                        <a th:href="@{/user/mahasiswa?id={id}(id=${mhs.getIdUser()})}" th:text="${mhs.getNim()}"></a>
+                    </li>
+                    <li th:text="${mhs.getJurusan()}"></li>
+                    <li th:text="${mhs.getSemester()}"></li> 
+                    <li th:text="${mhs.getAlamat()}"></li>
+                    <li th:text="${mhs.getNoHP()}"></li>
+                    </ul>
+            </article>
+            
+        </section>
+        </div>
+    
+    <div class="second-box">
+        <div id="feedback-form">
+            <h2 class="header" 
+                th:text="${mahasiswaRec != null and mahasiswaRec.getIdUser() != null and !mahasiswaRec.getIdUser().isEmpty()} 
+                        ? 'Form Edit Mahasiswa (ID: ' + ${mahasiswaRec.getIdUser()} + ')' 
+                        : 'Form Tambah Mahasiswa'">Form Management Mahasiswa</h2>
+            
+            <form th:action="@{/user/mahasiswa/save}" method="post"
+                th:object="${mahasiswaRec}" class="form-group">
+                
+                <label for="idUser" class="form-label">ID User</label>
+                <input type="text" id="idUser" name="idUser"
+                    th:value="${mahasiswaRec?.getIdUser()}" 
+                    th:readonly="${mahasiswaRec?.getIdUser() != null and !mahasiswaRec.getIdUser().isEmpty()}"
+                    required />
+                
+                <label for="nama" class="form-label">Nama</label>
+                <input type="text" id="nama" name="nama" th:value="${mahasiswaRec?.getNama()}" required />
+                
+                <label for="nim" class="form-label">NIM</label>
+                <input type="number" id="nim" name="nim" th:value="${mahasiswaRec?.getNim()}"
+                    th:readonly="${mahasiswaRec?.getIdUser() != null and !mahasiswaRec.getIdUser().isEmpty()}"
+                    required />
+                
+                <label for="jurusan" class="form-label">Jurusan</label>
+                <input type="text" id="jurusan" name="jurusan" th:value="${mahasiswaRec?.getJurusan()}" />
+                
+                <label for="semester" class="form-label">Semester</label>
+                <input type="number" id="semester" name="semester" th:value="${mahasiswaRec?.getSemester()}" min="1" max="14" required />
+                
+                <label for="alamat" class="form-label">Alamat</label>
+                <input type="text" id="alamat" name="alamat" th:value="${mahasiswaRec?.getAlamat()}" required />
+                
+                <label for="noHP" class="form-label">No. HP</label>
+                <input type="text" id="noHP" name="noHP" th:value="${mahasiswaRec?.getNoHP()}" required />
+                
+                
+                <div class="action-buttons">
+                    <ul>
+                        <li>
+                            <button type="submit" name="add" class="action-link" id="btn-add">
+                                <i class="fa fa-plus-circle"></i><span>ADD</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button type="submit" name="edit" class="action-link" id="btn-edit">
+                                <i class="fa fa-pencil"></i><span>EDIT</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button type="submit" name="delete" class="action-link" id="btn-delete"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus data Mahasiswa dengan NIM ' + this.form.nim.value + '?');">
+                                <i class="fa fa-trash-o"></i><span>DELETE</span>
+                            </button>
+                        </li>
+                        <li>
+                            <a th:href="@{/user/mahasiswa}" class="action-link" id="btn-new">
+                                <i class="fa fa-file-o"></i><span>NEW FORM</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/user}" class="action-link" id="btn-return">
+                                <i class="fa fa-reply"></i><span>RETURN</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                </form>
+        </div>
+    </div>
+    
+    <script>
+        feather.replace();
+    </script>
+</body>
+
+</html>

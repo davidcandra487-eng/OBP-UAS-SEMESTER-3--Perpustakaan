@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+/* ========================================================= */
+/* Penyesuaian untuk Konten Aplikasi di atas Background Gelap */
+/* ========================================================= */
+body {
+	height: 100vh;
+	background-color: #000;
+	display: flex;
+	align-items: flex-start; /* Aligns content to the top */
+	justify-content: center;
+    flex-wrap: wrap; /* Allows the two boxes to wrap/be side-by-side */
+    min-height: 100vh;
+    
+    /* Warna Teks Utama */
+    color: #00ff00; 
+}
+
+/* Konten Aplikasi (Daftar & Formulir) */
+.first-box, .second-box {
+    position: relative;
+    z-index: 10;
+    /* Latar belakang semi-transparan untuk keterbacaan */
+    background-color: rgba(0, 0, 0, 0.9); 
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px;
+    /* Efek Neon Glow pada Box */
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5); 
+    max-width: 45%; 
+    box-sizing: border-box;
+}
+/* Menyesuaikan warna heading dan link untuk tema "netro" */
+.first-box h2, .second-box h2 {
+    color: #00ff00; 
+    text-shadow: 0 0 5px #00ff00;
+}
+a, button {
+    color: #00ffff; /* Warna Link Cyan */
+}
+a:hover, button:hover {
+    color: #fff;
+}
+
+/* ========================================================= */
+/* CSS Background 'Netro' */
+/* ========================================================= */
+
+.grid-container {
+	--grid: 10rem;
+	width: 100%;
+	height: 100%;
+	position: fixed; /* Menggunakan fixed agar menutupi seluruh viewport */
+	top: 0;
+	left: 0;
+	transform-style: preserve-3d;
+	perspective: 100rem;
+	animation: rotate 100s linear infinite forwards;
+    z-index: -10; 
+}
+
+.plane {
+	--dir: 1;
+	width: 300%;
+	height: 150%;
+	min-height: 70rem;
+	position: absolute;
+	bottom: 0;
+	transform-style: preserve-3d;
+	transform-origin: bottom center;
+	transform: translateX(-50%) rotateX(85deg);
+}
+
+.plane:last-child {
+	--dir: -1;
+	top: 0;
+	transform-origin: top center;
+	transform: translateX(-50%) rotateX(-85deg);
+}
+
+.plane:last-child > .grid::after,
+.plane:last-child > .glow::after {
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 255) var(--grid), rgba(0, 0, 0, 0));
+}
+
+.plane > .grid,
+.plane > .glow {
+	transform-style: preserve-3d;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+}
+
+.plane > .grid::before, .plane > .grid::after, 
+.plane > .glow::before, .plane > .glow::after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.plane > .grid::before,
+.plane > .glow::before {
+	background-image: repeating-linear-gradient(to left, green, green 4px, transparent 4px, transparent var(--grid)),
+		repeating-linear-gradient(to bottom, green, green 4px, transparent 4px, transparent var(--grid));
+	animation: move 1s linear infinite forwards;
+}
+
+.plane > .grid::after,
+.plane > .glow::after {
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 255) var(--grid), rgba(0, 0, 0, 0));
+	z-index: 1;
+	transform: translateZ(1px);
+}
+
+.plane .glow {
+	filter: blur(1rem);
+	z-index: 1;
+	mix-blend-mode: plus-lighter;
+}
+
+/* Keyframes */
+@keyframes move {
+	from {
+		transform: translateY(0px);
+	}
+	
+	to {
+		transform: translateY(calc(var(--grid) * var(--dir)));
+	}
+}
+
+@keyframes rotate {
+	to {
+		transform: perspective(100rem) rotateZ(360deg);
+	}
+}
+
+@keyframes blink {
+	0% {
+		visibility: visible;
+	}
+	
+	50% {
+		visibility: visible;
+	}
+	
+	51% {
+		visibility: hidden;
+	}
+	
+	100% {
+		visibility: hidden;
+	}
+}

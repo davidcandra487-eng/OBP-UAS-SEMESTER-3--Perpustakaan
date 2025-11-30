@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/page.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        /* Font-Face Definitions (Dipertahankan dari kode Anda) */
+        @font-face {
+            font-family: "Circular";
+            src: url("/fonts/Circular-Light.woff2") format("woff2");
+            font-weight: 300;
+        }
+        @font-face {
+            font-family: "Circular";
+            src: url("/fonts/Circular-Book.woff2") format("woff2");
+            font-weight: 400;
+        }
+        @font-face {
+            font-family: "Circular";
+            src: url("/fonts/Circular-Medium.woff2") format("woff2");
+            font-weight: 500;
+        }
+        @font-face {
+            font-family: "Circular";
+            src: url("/fonts/Circular-Bold.woff2") format("woff2");
+            font-weight: 700;
+        }
+        /* Tambahkan font-display: swap; jika diperlukan untuk performa */
+    </style>
+</head>
+<body>
+    <div class="font-circular min-h-[250vh] bg-[#0a1551]">
+        
+        <div class="scroll tracking-2xl fixed top-1/2 left-1/2 z-2 -translate-1/2 transform text-2xl font-light text-white">
+            <span class="font-normal">HADALA KNOWLEDGE CENTER</span>
+        </div>
+        
+        <div class="header fixed top-0 left-0 z-1 flex h-screen w-full items-center justify-center bg-[#0a1551]">
+            
+            <div class="hda-logo-container relative z-2 flex items-center">
+                <!-- <img class="hda-logo" src="/demospringboot/images/buku.JPG" alt="Logo Buku"> -->
+                <div class="hda-text">HADALA</div>
+            </div>
+            <div class="header-overlay absolute -top-10 left-0 z-1 h-[150%] w-full bg-gradient-to-b from-[#0099ff] to-transparent blur-2xl backdrop-blur-3xl"></div>
+        </div>
+        
+        <div class="content fixed z-1 mx-auto w-full px-4 pt-24 text-[#b3e0ff] sm:pt-30">
+            <div class="mx-auto max-w-2xl">
+                <div class="shape-1 mx-auto mb-5 flex h-8 w-8 items-center justify-center rounded-full bg-[#0099FF] sm:mb-8 [@media(max-height:660px)]:mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-5 w-5 text-white"><path d="M16.753 2.033a1 1 0 0 1 .667.574l3.417 8.003c.34.797.108 1.607-.347 2.141a2.14 2.14 0 0 1-2.011.731c-.937-.172-2.067-.311-3.163-.282-1.112.03-2.091.231-2.802.658-.572.343-1.238.995-1.8 1.626-.207.233-.39.452-.537.633l2.217 4.436a1 1 0 1 1-1.789.894l-7.5-15a1 1 0 1 1 1.79-.894l.209.419c.468-.637 1.13-1.403 1.901-1.841 1.298-.738 2.507-.48 3.409-.263l.133.032c.884.212 1.477.355 2.157.145.615-.19 1.395-.627 2.069-1.06a19.47 19.47 0 0 0 1.1-.765l.015-.01.003-.003a1 1 0 0 1 .862-.174Z"></path></svg>
+                </div>
+
+                <h1 class="title-1 font-circular mb-5 text-center text-2xl font-bold text-white sm:text-3xl [@media(max-height:660px)]:mb-2 [@media(max-height:660px)]:text-2xl">Apa Itu HADALA Knowledge Center?</h1>
+                <p class="desc line-clamp-3 font-light tracking-wide sm:line-clamp-none [@media(max-height:660px)]:line-clamp-2">HADALA Knowledge Center adalah sistem yang menyediakan layanan pengelolaan informasi dan koleksi buku secara terstruktur, modern, dan mudah diakses. Sistem perpustakaan ini dirancang untuk mempermudah admin dalam mengatur data buku, anggota, serta transaksi peminjaman, sekaligus memberikan kemudahan bagi pengguna dalam mencari, menemukan, dan memanfaatkan sumber pengetahuan.</p>
+            </div>
+            
+            <div class="card-menu-container mx-auto max-w-5xl pt-6 sm:pt-12">
+                <div class="card-grid">
+                    <a href="/user" class="card card-1">
+                        <span style="font-size: 3rem;">👥</span>
+                        <h3>User</h3>
+                        <p>Kelola Data Mahasiswa & Dosen</p>
+                    </a>
+                    <a href="/koleksi" class="card card-2" style="border-color: #059669;">
+                        <span style="font-size: 3rem;">📖</span>
+                        <h3 style="color: #059669;">Koleksi</h3>
+                        <p>Buku, Jurnal & Majalah</p>
+                    </a>
+                    <a href="/peminjaman" class="card card-3" style="border-color: #d97706;">
+                        <span style="font-size: 3rem;">🔄</span>
+                        <h3 style="color: #d97706;">Peminjaman</h3>
+                        <p>Transaksi Peminjaman</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

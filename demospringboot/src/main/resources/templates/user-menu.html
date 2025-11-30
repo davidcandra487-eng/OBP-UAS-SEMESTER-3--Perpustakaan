@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Menu User</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="/css/day.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cat.css">
+
+    <style>
+        /* ==================================== */
+        /* PENTING: Penyesuaian Tata Letak */
+        /* ==================================== */
+        
+        /* Mengatur agar menu melingkar berada di posisi fixed kanan bawah */
+        .menu-wrapper {
+            position: fixed;
+            bottom: 30px; /* Jarak dari bawah */
+            right: 30px; /* Jarak dari kanan */
+            z-index: 100;
+        }
+
+        /* CARD GRID: Tetap terpusat dan berjarak dari atas */
+        .card-grid {
+            position: relative;
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            justify-content: center;
+            z-index: 5; 
+            
+            /* Memberi jarak yang cukup di bagian atas (100px) */
+            margin-top: 100px; 
+            margin-bottom: 20px; 
+            max-width: 1000px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .card {
+            display: block;
+            padding: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            text-align: center;
+            width: 150px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            font-family: sans-serif;
+            text-shadow: none; 
+            background-color: white;
+            color: #333;
+            border: 2px solid #ccc;
+        }
+
+        .card.mahasiswa h3 {
+            color: #4169e1; 
+        }
+        .card.dosen h3 {
+            color: #7c3aed; 
+        }
+
+        .card.mahasiswa {
+            border-color: #4169e1; 
+        }
+        .card.dosen {
+            border-color: #7c3aed;
+        }
+        
+        /* Gaya tambahan untuk ikon di dalam h3 */
+        .card h3 i {
+            margin-right: 5px; /* Memberi sedikit jarak antara ikon dan teks */
+        }
+
+        /* Container Kucing */
+        .cat-container {
+            max-width: 1000px; 
+            margin: 0 auto; 
+            position: relative;
+            height: 350px; 
+            overflow: hidden; 
+        }
+
+        /* Warna latar belakang dari CSS kucing */
+        body {
+            background-color: #f5b400; 
+        }
+
+        /* JANGAN HAPUS: style untuk elemen tema/lampu jika masih digunakan di day.css */
+        /* #theme-wrapper, label[for=light], label[for=night] { ... } */
+    </style>
+</head>
+<body>
+    
+    <div id="theme-wrapper">
+        <div class="sky">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        
+        <div class="sea"><span></span></div>
+        
+        <div class="content">
+            <div class="lighthouse">
+                <div class="base"></div>
+                <div class="tower"></div>
+                <div class="top"></div>
+                <div class="roof"></div>
+                <div class="light"></div>
+            </div>
+            
+            <div class="lighthouse">
+                <div class="base"></div>
+                <div class="tower"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="menu-wrapper">
+        <nav class="menu">
+            <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
+            <label class="menu-open-button" for="menu-open">
+                <span class="lines line-1"></span>
+                <span class="lines line-2"></span>
+                <span class="lines line-3"></span>
+            </label>
+
+            <a href="/" class="menu-item red" title="Home"> <i class="fa fa-home"></i> </a>
+            
+            <a href="/user" class="menu-item orange" title="Menu user"> <i class="fa fa-user"></i> </a>
+            
+        </nav>
+    </div>
+    
+    <div class="card-grid">
+        <a href="/user/mahasiswa" class="card mahasiswa">
+            <h3><i class="fa fa-user"></i> Mahasiswa</h3>
+            <p>Data Mahasiswa</p>
+        </a>
+        
+        <a href="/user/dosen" class="card dosen">
+            <h3><i class="fa fa-briefcase"></i> Dosen</h3>
+            <p>Data Dosen</p>
+        </a>
+    </div>
+
+    <div class="cat-container">
+        <div class="container">
+            <div class="cat">
+                <div class="whiskers"></div>
+                <div class="face">
+                    <div class="eyes">
+                        <div class="pupils" id="pupils"></div>
+                    </div>
+                    <div class="ear-l"></div>
+                    <div class="ear-r"></div>
+                </div>
+                <div class="tag"></div>
+                <div class="tail"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Script Kucing (dipertahankan)
+        document.addEventListener("mousemove", (event) => {
+            const eyes = document.querySelector(".eyes");
+            const pupil = document.getElementById("pupils");
+
+            if (!eyes || !pupil) return; 
+
+            const mouseX = event.clientX;
+            const mouseY = event.clientY;
+
+            const eyesRect = eyes.getBoundingClientRect();
+            const eyesX = eyesRect.left + eyesRect.width / 2;
+            const eyesY = eyesRect.top + eyesRect.height / 2;
+            const angle = Math.atan2(mouseY - eyesY, mouseX - eyesX);
+            const distance = Math.min(eyesRect.width / 8, eyesRect.height / 8);
+
+            const pupilX = Math.cos(angle) * distance;
+            const pupilY = Math.sin(angle) * distance;
+
+            // Memperbaiki pergerakan pupil dengan offset translate
+            pupil.style.transform = `translate(-50%, -50%) translate(${pupilX}px, ${pupilY}px)`;
+        });
+    </script>
+</body>
+</html>

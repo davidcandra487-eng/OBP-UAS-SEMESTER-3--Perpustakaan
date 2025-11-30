@@ -1,0 +1,212 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    padding: 40px;
+}
+
+/* Ini untuk navigation */
+.navbar {
+    background: wheat;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.logo span {
+    color: #fd5f00;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: 20px;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #fd5f00;
+}
+
+
+
+
+
+
+/* Ini untuk Hero Section */
+.hero {
+    background-image: url('../images/tampilanzimbabwe.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    margin-top: 70px;
+}
+
+.hero-content {
+    color: white;
+    max-width: 600px;
+}
+
+.subtitle {
+    color: #fd5f00;
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.video-btn {
+    width: 80px;
+    height: 80px;
+    background: #fd5f00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+}
+
+
+
+
+
+/* Ini Untuk search Section */
+.search {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.search-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.tab {
+    padding: 15px 40px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.tab.active {
+    background: #fd5f00;
+    color: white;
+}
+
+.search-form {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    gap: 20px;
+    align-items: end;
+}
+
+.input-box .icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 14px;
+}
+
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.input-box {
+    position: relative;
+}
+
+.input-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.input-box input,
+.input-group select {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.search-btn {
+    background: #fd5f00;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}

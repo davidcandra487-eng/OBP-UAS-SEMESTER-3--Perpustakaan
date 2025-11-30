@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Form Peminjaman</title><link rel="stylesheet" href="/css/perpus.css"></head>
+<body>
+    <div class="container">
+        <div class="navbar"><a href="/peminjaman">Kembali</a></div>
+        <div class="form-box" style="max-width: 600px;">
+
+            <div th:if="${error}" class="alert alert-danger" 
+                style="background:#fdd; color:#900; padding:10px; margin-bottom:15px;">
+                <p th:text="${error}"></p>
+            </div>
+
+
+            <form th:action="@{/peminjaman/save}" th:object="${peminjaman}" method="post" class="box">
+                <h2 style="text-align:center; margin-bottom:1.5rem;">Form Peminjaman</h2>
+
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-group" th:if="${peminjaman.id != null}">
+                    <label>ID</label>
+                    <input type="text" th:value="${peminjaman.id}" class="form-control" readonly>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Kode Pinjam</label>
+                    <input type="text" th:field="*{kodePinjam}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Peminjam (User)</label>
+                    <select th:field="*{objUser}" class="form-control" required>
+                        <option value="">Pilih User</option>
+                        <option th:each="u : ${users}" th:value="${u.idUser}" th:text="${u.nama} + ' (' + ${u.idUser} + ')'"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Buku</label>
+                    <select th:field="*{objBuku}" class="form-control" required>
+                        <option value="">Pilih Buku</option>
+                        <option th:each="b : ${bukus}" th:value="${b.kodeKoleksi}" th:text="${b.judul} + ' - ' + ${b.status}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tanggal Pinjam</label>
+                    <input type="date" th:field="*{tglPinjam}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Tanggal Kembali</label>
+                    <input type="date" th:field="*{tglKembali}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Denda</label>
+                    <input type="number" step="0.01" th:field="*{denda}" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Status</label>
+                    <select th:field="*{statusPinjam}" class="form-control">
+                        <option value="Aktif">Aktif (Sedang Dipinjam)</option>
+                        <option value="Selesai">Selesai (Dikembalikan)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%">Simpan</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

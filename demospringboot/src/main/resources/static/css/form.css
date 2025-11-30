@@ -1,0 +1,105 @@
+/* form.css (MODIFIKASI: Tambah styling Delete & Aturan Spinner NIM) */
+#feedback-form {
+    background: rgba(255, 255, 255, 0.1); /* Mirip dengan $light-bg */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin-top: 40px;
+}
+
+.form-group label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+/* --- KODE MENGHILANGKAN TOMBOL SPINNER HANYA PADA NIM (#nim) --- */
+
+/* Sembunyikan tombol spinner pada input NIM untuk browser WebKit (Chrome, Safari, Edge) */
+#nim::-webkit-outer-spin-button,
+#nim::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Sembunyikan tombol spinner pada input NIM untuk Firefox */
+#nim {
+    -moz-appearance: textfield;
+}
+
+/* ---------------------------------------------------------------------------------- */
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: background-color 0.2s;
+    text-decoration: none; /* Untuk tag <a> */
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--blue, rgb(79, 192, 210));
+    color: var(--dark-bg, black);
+}
+
+.btn-primary:hover {
+    background-color: rgb(47, 115, 126);
+    color: white;
+}
+
+.btn-secondary {
+    background-color: gray;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: darkgray;
+}
+
+/* Styling tambahan untuk tombol DELETE */
+.btn-danger {
+    background-color: var(--orange, rgb(235, 118, 85)); /* Merah/Oranye untuk Delete */
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: rgb(200, 100, 70);
+    color: white;
+}
+
+/* Styling untuk pesan feedback */
+.success-message {
+    padding: 10px;
+    margin-bottom: 20px;
+    color: white;
+    background-color: var(--green, rgb(82, 210, 154));
+    border-radius: 4px;
+    text-align: center;
+}
+
+.error-message {
+    padding: 10px;
+    margin-bottom: 20px;
+    color: white;
+    background-color: var(--orange, rgb(235, 118, 85));
+    border-radius: 4px;
+    text-align: center;
+}

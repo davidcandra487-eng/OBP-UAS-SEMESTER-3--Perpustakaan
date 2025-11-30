@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Halaman Peminjaman</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/button-3d.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cmp.css}" /> <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tetris.css}" />
+    
+    <style>
+        /* CSS untuk penempatan FAB di kanan bawah */
+        .menu-wrapper {
+            position: fixed;
+            bottom: 30px; 
+            right: 30px; 
+            z-index: 100; 
+        }
+        
+        /* Styling untuk tombol di bawah tabel (sejajar) */
+        .action-buttons-bottom ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+            display: flex;
+            gap: 10px; 
+            justify-content: flex-start;
+        }
+        
+        /* Mengatur ulang gaya tabel agar kembali ke format dasar */
+        .old-table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        .old-table-container table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #2c2c2c; /* Latar belakang gelap */
+            color: #fff; /* <--- MEMUTIHKAN WARNA TEKS TABEL */
+        }
+        .old-table-container th, .old-table-container td {
+            border: 1px solid #444;
+            padding: 10px 15px;
+            text-align: left;
+            color: #fff; /* <--- MEMUTIHKAN WARNA TEKS ISI DAN HEADER TABEL */
+        }
+        .old-table-container th {
+            background-color: #444;
+        }
+        
+        /* Styling untuk tombol di kolom Aksi */
+        .table-action-buttons a {
+            padding: 5px 10px;
+            margin-right: 5px;
+            border-radius: 4px;
+            text-decoration: none;
+            color: white;
+            font-size: 0.9em;
+            display: inline-block;
+        }
+        .btn-warning {
+            background-color: #f7a048; 
+        }
+        .btn-danger {
+            background-color: #dc2626; 
+        }
+        
+        /* Tombol Aksi Global di bawah */
+        #btn-add { background-color: #38a169; }
+        #btn-return { background-color: #2563eb; }
+        
+        /* Menghilangkan elemen navbar lama */
+        .navbar { display: none; }
+        
+        /* Tambahan: Memastikan judul utama juga berwarna putih */
+        .first-box h2 {
+            color: #FFFFFF; /* <--- MEMUTIHKAN WARNA TEKS JUDUL */
+            margin-bottom: 20px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <canvas></canvas>
+    
+    <div class="menu-wrapper">
+        <nav class="menu">
+            <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
+            
+            <label class="menu-open-button" for="menu-open">
+                <span class="lines line-1"></span>
+                <span class="lines line-2"></span>
+                <span class="lines line-3"></span>
+            </label>
+
+            <a href="/" class="menu-item red" title="Home"> <i class="fa fa-home"></i> </a>
+            
+            <a href="/koleksi" class="menu-item orange" title="Menu Koleksi"> <i class="fa fa-book"></i> </a>
+            
+            <a href="/peminjaman" class="menu-item green" title="Transaksi Peminjaman"> <i class="fa fa-exchange"></i> </a>
+            
+        </nav>
+    </div>
+
+    <div class="first-box">
+        <h2>Daftar Peminjaman</h2>
+        
+        <div th:if="${success}" class="success-message" th:text="${success}"></div>
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+        <div class="old-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Kode</th>
+                        <th>Peminjam</th>
+                        <th>Buku</th>
+                        <th>Tgl Pinjam</th>
+                        <th>Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="p : ${listPeminjaman}">
+                        <td th:text="${p.kodePinjam}"></td>
+                        <td th:text="${p.objUser != null ? p.objUser.nama : '-'}"></td>
+                        <td th:text="${p.objBuku != null ? p.objBuku.judul : '-'}" th:title="${p.objBuku != null ? p.objBuku.judul : '-'}"></td>
+                        <td th:text="${p.tglPinjam}"></td>
+                        <td>
+                            <span th:if="${p.statusPinjam == 'Aktif'}" style="color: green; font-weight: bold;">Dipinjam</span>
+                            <span th:if="${p.statusPinjam == 'Selesai'}" style="color: blue;">Selesai</span>
+                        </td>
+                        <td class="table-action-buttons">
+                            <a th:href="@{/peminjaman/edit/{id}(id=${p.id})}" class="btn-warning">Edit</a>
+                            <a th:href="@{/peminjaman/delete/{id}(id=${p.id})}" class="btn-danger" onclick="return confirm('Hapus transaksi ini?')">Hapus</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="action-buttons-bottom">
+            <ul>
+                <li>
+                    <a th:href="@{/peminjaman/add}" class="action-link" id="btn-add">
+                        <i class="fa fa-plus-circle"></i><span>TAMBAH TRANSAKSI</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/koleksi}" class="action-link" id="btn-return">
+                        <i class="fa fa-reply"></i><span>RETURN</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    
+    <script>
+        feather.replace();
+    </script>
+    
+    <script type="text/javascript" th:src="@{/js/tetris.js}"></script>
+</body>
+</html>

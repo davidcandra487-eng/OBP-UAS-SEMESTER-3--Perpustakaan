@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Halaman Majalah</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/button-3d.css}" />
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/netro.css}" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+    
+    <div class="first-box">
+        <h2>Daftar Majalah</h2>
+
+        <div th:if="${message}" class="success-message" th:text="${message}"></div>
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+        <section class="wrapper">
+            <main class="row title">
+                <ul>
+                    <li>No</li>
+                    <li>Kode Koleksi</li> 
+                    <li>Edisi</li>
+                    <li>Penerbit</li>
+                    <li>Tahun Terbit</li>
+                    <li>Lokasi Rak</li>
+                    </ul>
+            </main>
+
+            <article class="row majalah-row" th:each="majalah, no : ${listMajalah}">
+                <ul>
+                    <li th:text="${no.count}"></li>
+                    <li>
+                        <a th:href="@{/koleksi/majalah?id={kodeKoleksi}(kodeKoleksi=${majalah.kodeKoleksi})}"
+                           th:text="${majalah.kodeKoleksi}"></a>
+                    </li>
+                    <li th:text="${majalah.edisi}"></li>
+                    <li th:text="${majalah.penerbit}"></li>
+                    <li th:text="${majalah.tahunTerbit}"></li>
+                    <li th:text="${majalah.lokasiRak}"></li>
+                </ul>
+            </article>
+        </section>
+    </div>
+
+    <div class="second-box">
+        <div id="feedback-form">
+            <h2 class="header"
+                th:text="${majalahRec != null and majalahRec.kodeKoleksi != null and !majalahRec.kodeKoleksi.isEmpty()} 
+                            ? 'Form Edit Majalah (Kode: ' + ${majalahRec.kodeKoleksi} + ')' 
+                            : 'Form Tambah Majalah'">Form Majalah
+            </h2>
+
+            <form th:action="@{/koleksi/majalah/save}" method="post"
+                  th:object="${majalahRec}" class="form-group">
+
+                <label for="kodeKoleksi" class="form-label">Kode Koleksi</label>
+                <input type="text" id="kodeKoleksi" name="kodeKoleksi"
+                       th:value="${majalahRec?.kodeKoleksi}" 
+                       required
+                       th:readonly="${majalahRec?.kodeKoleksi != null and !majalahRec.kodeKoleksi.isEmpty()}" />
+
+                <label for="edisi" class="form-label">Edisi</label>
+                <input type="text" id="edisi" name="edisi"
+                       th:value="${majalahRec?.edisi}" required />
+
+                <label for="penerbit" class="form-label">Penerbit</label>
+                <input type="text" id="penerbit" name="penerbit"
+                       th:value="${majalahRec?.penerbit}" />
+
+                <label for="tahunTerbit" class="form-label">Tahun Terbit</label>
+                <input type="number" id="tahunTerbit" name="tahunTerbit"
+                       th:value="${majalahRec?.tahunTerbit}" min="1000" max="2100" required />
+
+                <label for="lokasiRak" class="form-label">Lokasi Rak</label>
+                <input type="text" id="lokasiRak" name="lokasiRak"
+                       th:value="${majalahRec?.lokasiRak}" />
+
+                <div class="action-buttons">
+                    <ul>
+                        <li>
+                            <button type="submit" name="add" class="action-link" id="btn-add">
+                                <i class="fa fa-plus-circle"></i><span>ADD</span>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button type="submit" name="edit" class="action-link" id="btn-edit"
+                                th:disabled="${majalahRec?.kodeKoleksi == null or majalahRec.kodeKoleksi.isEmpty()}">
+                                <i class="fa fa-pencil"></i><span>EDIT</span>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button type="submit" name="delete" class="action-link" id="btn-delete"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus data majalah dengan Kode Koleksi ' + this.form.kodeKoleksi.value + '?');"
+                                th:disabled="${majalahRec?.kodeKoleksi == null or majalahRec.kodeKoleksi.isEmpty()}">
+                               <i class="fa fa-trash-o"></i><span>DELETE</span>
+                            </button>
+                        </li>
+
+                        <li>
+                            <a th:href="@{/koleksi/majalah}" class="action-link" id="btn-new">
+                                <i class="fa fa-file-o"></i><span>NEW FORM</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a th:href="@{/koleksi}" class="action-link" id="btn-return">
+                                <i class="fa fa-reply"></i><span>RETURN</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        <div class="plane">
+            <div class="grid"></div>
+            <div class="glow"></div>
+        </div>
+        <div class="plane">
+            <div class="grid"></div>
+            <div class="glow"></div>
+        </div>
+    </div>
+    
+    <script>feather.replace();</script>
+</body>
+
+</html>

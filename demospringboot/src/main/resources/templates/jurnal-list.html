@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Halaman Jurnal</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/button-3d.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/color.css}" />
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    
+    <div class="wrap">
+    </div>
+    
+    <div class="first-box">
+        <h2>Daftar Jurnal</h2>
+        <div th:if="${message}" class="success-message" th:text="${message}"></div>
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+        <section class="wrapper">
+            <main class="row title">
+                <ul>
+                    <li>No</li>
+                    <li>Kode Koleksi</li> 
+                    <li>Volume</li>
+                    <li>Penulis</li>
+                    <li>Tahun Terbit</li>
+                    <li>Lokasi Rak</li>
+                </ul>
+            </main>
+
+            <article class="row jurnal-row" th:each="jurnal, no : ${listJurnal}">
+                <ul>
+                    <li th:text="${no.count}"></li>
+                    <li>
+                        <a th:href="@{/koleksi/jurnal?id={kodeKoleksi}(kodeKoleksi=${jurnal.kodeKoleksi})}"
+                           th:text="${jurnal.kodeKoleksi}"></a>
+                    </li>
+                    <li th:text="${jurnal.volume}"></li>
+                    <li th:text="${jurnal.penulis}"></li>
+                    <li th:text="${jurnal.tahunTerbit}"></li>
+                    <li th:text="${jurnal.lokasiRak}"></li>
+                </ul>
+            </article>
+        </section>
+    </div>
+
+    <div class="second-box">
+        <div id="feedback-form">
+            <h2 class="header"
+                th:text="${jurnalRec != null and jurnalRec.kodeKoleksi != null and !jurnalRec.kodeKoleksi.isEmpty()} 
+                            ? 'Form Edit Jurnal (Kode: ' + ${jurnalRec.kodeKoleksi} + ')' 
+                            : 'Form Tambah Jurnal'">Form Jurnal
+            </h2>
+
+            <form th:action="@{/koleksi/jurnal/save}" method="post"
+                  th:object="${jurnalRec}" class="form-group">
+
+                <label for="kodeKoleksi" class="form-label">Kode Koleksi</label>
+                <input type="text" id="kodeKoleksi" name="kodeKoleksi"
+                       th:value="${jurnalRec?.kodeKoleksi}" 
+                       required
+                       th:readonly="${jurnalRec?.kodeKoleksi != null and !jurnalRec.kodeKoleksi.isEmpty()}" />
+
+                <label for="volume" class="form-label">Volume</label>
+                <input type="text" id="volume" name="volume"
+                       th:value="${jurnalRec?.volume}" required />
+
+                <label for="penulis" class="form-label">Penulis</label>
+                <input type="text" id="penulis" name="penulis"
+                       th:value="${jurnalRec?.penulis}" />
+
+                <label for="tahunTerbit" class="form-label">Tahun Terbit</label>
+                <input type="number" id="tahunTerbit" name="tahunTerbit"
+                       th:value="${jurnalRec?.tahunTerbit}" min="1000" max="2100" required />
+
+                <label for="lokasiRak" class="form-label">Lokasi Rak</label>
+                <input type="text" id="lokasiRak" name="lokasiRak"
+                       th:value="${jurnalRec?.lokasiRak}" />
+
+                <div class="action-buttons">
+                    <ul>
+                        <li>
+                            <button type="submit" name="add" class="action-link" id="btn-add">
+                                <i class="fa fa-plus-circle"></i><span>ADD</span>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button type="submit" name="edit" class="action-link" id="btn-edit"
+                                th:disabled="${jurnalRec?.kodeKoleksi == null or jurnalRec.kodeKoleksi.isEmpty()}">
+                                <i class="fa fa-pencil"></i><span>EDIT</span>
+                            </button>
+                        </li>
+
+                        <li>
+                            <button type="submit" name="delete" class="action-link" id="btn-delete"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus data jurnal dengan Kode Koleksi ' + this.form.kodeKoleksi.value + '?');"
+                                th:disabled="${jurnalRec?.kodeKoleksi == null or jurnalRec.kodeKoleksi.isEmpty()}">
+                               <i class="fa fa-trash-o"></i><span>DELETE</span>
+                            </button>
+                        </li>
+
+                        <li>
+                            <a th:href="@{/koleksi/jurnal}" class="action-link" id="btn-new">
+                                <i class="fa fa-file-o"></i><span>NEW FORM</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a th:href="@{/koleksi}" class="action-link" id="btn-return">
+                                <i class="fa fa-reply"></i><span>RETURN</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>feather.replace();</script>
+    
+    <script>
+        const wrap = document.querySelector('.wrap');
+        const total = 144;
+        const time = 4;
+
+        if (wrap) {
+            wrap.innerHTML = '';
+            
+            for (let i = 1; i <= total; i++) {
+                const c = document.createElement('div');
+                c.className = 'c';
+                c.style.left = ((i - 1) * 0.69444) + '%';
+                
+                const hue = (300 / total) * i;
+                c.style.backgroundImage = `linear-gradient(to bottom, black, hsla(${hue}, 100%, 50%, 0.8))`;
+                c.style.animationDelay = (Math.random() * total * (time / total) * -1) + 's';
+                
+                const dot = document.createElement('span');
+                dot.style.background = `hsla(${hue}, 100%, 50%, 1)`;
+                c.appendChild(dot);
+                wrap.appendChild(c);
+            }
+        }
+    </script>
+</body>
+
+</html>

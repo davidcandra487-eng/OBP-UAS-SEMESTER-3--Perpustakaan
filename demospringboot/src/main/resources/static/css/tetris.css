@@ -1,0 +1,30 @@
+body {
+    background: #141414;
+    /* Biarkan browser menangani overflow secara default (atau atur ke auto) */
+    /* overflow: auto; */ 
+}
+
+canvas {
+    position: fixed; /* Ganti 'absolute' menjadi 'fixed' agar latar belakang Tetris tidak bergerak saat scroll */
+    top: 0;
+    left: 0;
+    z-index: -1; 
+}
+/* Opsional: Atur konten utama agar memiliki latar belakang semi-transparan atau warna solid
+   untuk memastikan teks tetap terbaca di atas animasi Tetris */
+.first-box, .second-box {
+    position: relative; /* Agar konten berada di atas canvas */
+    z-index: 1; /* Pastikan konten berada di atas canvas */
+    background-color: rgba(30, 30, 30, 0.8); /* Contoh: latar belakang gelap semi-transparan */
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    color: white; /* Contoh: teks berwarna putih agar kontras */
+}
+
+/* Opsional: Atur agar daftar buku dan form terlihat lebih kontras di atas background baru */
+.row li, .form-group input, .form-group select {
+    background-color: rgba(255, 255, 255, 0.1); 
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}

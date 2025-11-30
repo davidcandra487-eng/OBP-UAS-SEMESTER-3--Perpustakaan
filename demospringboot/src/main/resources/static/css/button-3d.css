@@ -1,0 +1,148 @@
+
+.action-buttons {
+    margin-top: 30px; /* Jarak dari input field */
+    margin-bottom: 20px;
+}
+
+.action-buttons ul {
+    display: flex; /* Gunakan Flexbox untuk meratakan horizontal */
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.action-buttons li {
+    list-style: none;
+    margin: 0 5px;
+    flex-grow: 1; /* Agar tombol memiliki lebar yang sama */
+}
+
+/* Base style untuk link/button dalam list item (class action-link menggantikan 'ul li a') */
+.action-link {
+    display: block; 
+    width: 100%; /* Agar memenuhi lebar li */
+    height: 80px;
+    background: #00A9FE; /* Warna default yang akan di-override per ID */
+    text-align: left;
+    padding: 20px;
+    transition: 0.5s;
+    border: none;
+    cursor: pointer;
+    position: relative; 
+    box-sizing: border-box; 
+    text-decoration: none; /* Untuk link New Form */
+    z-index: 10; /* Z-index dasar */
+}
+
+/* ---------------------------------------------------------------------------------- */
+/* STYLING IKON DAN TEKS */
+/* ---------------------------------------------------------------------------------- */
+
+.action-link .fa {
+    font-size: 40px; 
+    line-height: 40px;
+    transition: 0.5s;
+    padding-right: 14px;
+    color: white;
+    text-shadow: -3px 6px grey;
+    float: left; 
+    margin-top: -10px; 
+}
+
+.action-link span {
+    position: relative;
+    display: block;
+    top: 5px; 
+    letter-spacing: 2px; 
+    font-size: 18px; 
+    font-weight: bold;
+    transition: 0.5s;
+    color: white;
+    text-shadow: -3px 6px grey;
+}
+
+/* Hover effects (Ganti selector 'ul li' menjadi '.action-buttons li') */
+.action-buttons li:hover .fa,
+.action-buttons li:hover span {
+    color: rgb(235, 233, 233) !important;
+}
+
+/* ---------------------------------------------------------------------------------- */
+/* PSEUDO-ELEMENTS UNTUK EFEK 3D */
+/* ---------------------------------------------------------------------------------- */
+
+.action-link:before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -20px;
+    height: 101%;
+    width: 20px;
+    background: #FD6BB6; /* Warna default yang akan di-override per ID */
+    transform: rotate(0deg) skewY(-45deg);
+    transition: all 0.5s;
+    z-index: -1;
+}
+
+.action-link:after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 0px; /* <--- PERBAIKAN UTAMA DI SINI (Dari -10px menjadi 0px) */
+    height: 20px;
+    width: 100%;
+    background: #D9EB4B; /* Warna default yang akan di-override per ID */
+    transition: 0.5s;
+    transform: rotate(0deg) skewX(-45deg);
+    z-index: -1;
+}
+
+/* Hover effects */
+.action-link:hover {
+    transform: rotate(0deg) skew(0) translate(-5px, 5px); 
+    z-index: 100; /* Pastikan tombol yang di-hover muncul paling depan */
+}
+
+.action-link:hover:after {
+    background: none;
+    top: 120px;
+    transition: All 0.4s ease;
+}
+
+.action-link:hover:before {
+    background: none;
+    right: 0px;
+    position: absolute;
+    transition: All 0.4s ease;
+}
+
+
+/* ADD Button (Hijau) */
+#btn-add { background: #4CAF50; z-index: 13; }
+#btn-add:before { background: #388E3C; } 
+#btn-add:after { background: #388E3C; left: 0px; } /* Sesuaikan warna bayangan bawah */
+#btn-add:hover { background-color: #388E3C; }
+
+/* EDIT Button (Oranye) */
+#btn-edit { background: #FF9800; z-index: 12; }
+#btn-edit:before { background: #F57C00; } /* Warna lebih gelap */
+#btn-edit:after { background: #F57C00; left: 0px; } /* Sesuaikan warna bayangan bawah */
+#btn-edit:hover { background-color: #F57C00; }
+
+/* DELETE Button (Merah) */
+#btn-delete { background: #F44336; z-index: 11; }
+#btn-delete:before { background: #C62828; } 
+#btn-delete:after { background: #C62828; left: 0px; } /* Sesuaikan warna bayangan bawah */
+#btn-delete:hover { background-color: #C62828; }
+
+/* NEW FORM Button (Abu-abu) */
+#btn-new { background: #607D8B; z-index: 10; }
+#btn-new:before { background: #455A64; } 
+#btn-new:after { background: #455A64; left: 0px; } /* Sesuaikan warna bayangan bawah */
+#btn-new:hover { background-color: #455A64; }
+
+.form-group > .btn {
+    display: none; 
+}

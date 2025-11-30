@@ -1,0 +1,76 @@
+/* color.css */
+
+/* Variabel dari SCSS: $total: 144; $time: 4; $height: 400; $percent: 0.69444%; $dotSize: 0.9; */
+:root {
+    --drop-height: 400px;
+    --dot-size: 0.9vw;
+    --animation-time: 4s;
+    --c-width: 0.69444%; /* 100% / 144 */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: black;
+}
+
+/* KONTEN UTAMA - HARUS DIBUAT OVERLAY AGAR BISA SCROLL */
+.first-box, .second-box {
+    position: relative;
+    z-index: 10; /* Pastikan konten di atas background */
+    background-color: rgba(30, 30, 30, 0.9); /* Latar belakang gelap semi-transparan */
+    color: white;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    /* Aktifkan scrolling pada konten utama */
+}
+
+/* Wrapper untuk menampung semua 'c' */
+.wrap {
+    position: fixed; /* Gunakan fixed agar tetap di tempat saat konten diskroll (jika overflow body diubah) */
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1; /* Posisikan di bawah konten utama */
+}
+
+/* Elemen 'c' yang akan jatuh */
+.c {
+    position: absolute;
+    height: var(--drop-height);
+    width: var(--c-width);
+    margin-top: calc(-1 * var(--drop-height));
+    animation: drop var(--animation-time) infinite ease-in;
+    /* 'left' dan 'background-image' diatur di JavaScript */
+}
+
+/* Elemen dot/titik (menggunakan span di JS untuk menggantikan :after) */
+.c span {
+    content: "";
+    position: absolute;
+    width: var(--dot-size);
+    height: var(--dot-size);
+    border-radius: 50%;
+    left: 50%;
+    bottom: calc(-1 * var(--dot-size) / 2);
+    margin-left: calc(-1 * var(--dot-size) / 2);
+    /* 'background' diatur di JavaScript */
+}
+
+@keyframes drop {
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(0, 150vh, 0);
+        opacity: 0;
+    }
+}

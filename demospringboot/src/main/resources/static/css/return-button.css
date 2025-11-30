@@ -1,0 +1,115 @@
+/* return-button.css */
+
+/* Definisikan variabel warna */
+:root {
+    --return-bg: #facc15; /* yellow-400 */
+    --return-text: #0f172a; /* slate-950 */
+    --return-hover-shadow: rgba(250, 204, 21, 0.5); /* shadow-yellow-400/30 */
+    --icon-bg: #ffffff;
+    --ping-color-1: #fb923c; /* orange-400 */
+    --ping-color-2: #ea580c; /* orange-600 */
+}
+
+/* Container untuk tombol Return */
+.return-container {
+    /* **PENTING: MENGATUR POSISI ABSOLUT DI POJOK KIRI ATAS first-box** */
+    position: absolute;
+    top: 20px; /* Jarak dari atas first-box */
+    left: 20px; /* Jarak dari kiri first-box */
+    right: auto; 
+    z-index: 10;
+}
+
+/* Base style untuk tombol Return (UKURAN DIPERKECIL) */
+.return-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 6px; /* rounded */
+    height: 40px; /* Tinggi tombol */
+    font-size: 16px; 
+    padding-left: 3rem; /* Padding kiri (menyesuaikan lebar ikon) */
+    padding-right: 1rem; 
+    
+    background-color: var(--return-bg);
+    color: var(--return-text);
+    text-decoration: none;
+    cursor: pointer;
+    
+    position: relative;
+    box-shadow: 0 2px 4px var(--return-hover-shadow); 
+    transition: all 0.3s ease;
+}
+
+/* Efek hover: Rotasi dan bayangan */
+.return-btn:hover {
+    transform: rotate(3deg);
+    box-shadow: 0 6px 10px var(--return-hover-shadow); 
+}
+
+/* Icon Container (UKURAN DIPERKECIL) */
+.return-btn .icon-box {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-top: 3px; 
+    margin-left: 3px; 
+    padding: 0.25rem; 
+    bottom: 3px;
+    
+    background-color: var(--icon-bg);
+    color: var(--return-text);
+    
+    border-radius: 4px; 
+    height: 34px; /* Tinggi ikon */
+    width: 34px; /* Lebar ikon */
+    
+    transition: all 0.3s ease;
+}
+
+/* Efek hover pada icon container */
+.return-btn:hover .icon-box {
+    width: calc(100% - 6px); /* Mengikuti padding baru */
+}
+
+/* Icon SVG */
+.return-btn svg {
+    height: 100%;
+    width: 100%;
+}
+
+/* Keyframe untuk Ping animation */
+@keyframes ping {
+    75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Ping layer 1 (outer glow) */
+.return-btn .ping-1 {
+    background-color: var(--ping-color-1);
+    position: absolute;
+    display: flex;
+    border-radius: 9999px;
+    opacity: 0.75;
+    height: 14px; 
+    width: 14px; 
+    top: -6px; 
+    right: -6px; 
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Ping layer 2 (solid dot) */
+.return-btn .ping-2 {
+    background-color: var(--ping-color-2);
+    position: absolute;
+    display: flex;
+    border-radius: 9999px;
+    height: 14px; 
+    width: 14px; 
+    top: -6px; 
+    right: -6px; 
+    transform: scale(0.9);
+}

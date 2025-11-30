@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Halaman Dosen</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" /> 
+    <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/form.css}" />
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/header.css}" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/button-3d.css}" />
+    
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+    <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+
+    <div class="first-box">
+        
+        <h2>Daftar Dosen</h2>
+        
+        <div th:if="${message}" class="success-message" th:text="${message}"></div>
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+
+        <section class="wrapper">
+            <main class="row title">
+                <ul>
+                    <li>No</li>
+                    <li>ID User</li>
+                    <li>Nama</li>
+                    <li>NIP</li>
+                    <li>Fakultas</li>
+                    <li>Jabatan</li>
+                    <li>Alamat</li>
+                    <li>No. HP</li>
+                    </ul>
+            </main>
+            
+            <article class="row dosen-row" th:each="dsn, no : ${listDosen}">
+                <ul>
+                    <li th:text="${no.count}"></li>
+                    <li>
+                        <a th:href="@{/user/dosen?id={id}(id=${dsn.getIdUser()})}" th:text="${dsn.getIdUser()}"></a>
+                    </li>
+                    <li th:text="${dsn.getNama()}"></li>
+                    <li>
+                        <a th:href="@{/user/dosen?id={id}(id=${dsn.getIdUser()})}" th:text="${dsn.getNip()}"></a>
+                    </li>
+                    <li th:text="${dsn.getFakultas()}"></li>
+                    <li th:text="${dsn.getJabatan()}"></li>
+                    <li th:text="${dsn.getAlamat()}"></li>
+                    <li th:text="${dsn.getNoHP()}"></li>
+                    </ul>
+            </article>
+            
+        </section>
+        </div>
+    
+    <div class="second-box">
+        <div id="feedback-form">
+            <h2 class="header" 
+                th:text="${dosenRec != null and dosenRec.getIdUser() != null and !dosenRec.getIdUser().isEmpty()} 
+                        ? 'Form Edit Dosen (ID: ' + ${dosenRec.getIdUser()} + ')' 
+                        : 'Form Tambah Dosen'">Form Management Dosen</h2>
+            
+            <form th:action="@{/user/dosen/save}" method="post"
+                th:object="${dosenRec}" class="form-group">
+                
+                <label for="idUser" class="form-label">ID User</label>
+                <input type="text" id="idUser" name="idUser"
+                    th:value="${dosenRec?.getIdUser()}" 
+                    th:readonly="${dosenRec?.getIdUser() != null and !dosenRec.getIdUser().isEmpty()}"
+                    required />
+                
+                <label for="nama" class="form-label">Nama</label>
+                <input type="text" id="nama" name="nama" th:value="${dosenRec?.getNama()}" required />
+                
+                <label for="nip" class="form-label">NIP</label>
+                <input type="number" id="nip" name="nip" th:value="${dosenRec?.getNip()}"
+                    th:readonly="${dosenRec?.getIdUser() != null and !dosenRec.getIdUser().isEmpty()}"
+                    required />
+                
+                <label for="fakultas" class="form-label">Fakultas</label>
+                <input type="text" id="fakultas" name="fakultas" th:value="${dosenRec?.getFakultas()}" />
+                
+                <label for="jabatan" class="form-label">Jabatan</label>
+                <input type="text" id="jabatan" name="jabatan" th:value="${dosenRec?.getJabatan()}" />
+                
+                <label for="alamat" class="form-label">Alamat</label>
+                <input type="text" id="alamat" name="alamat" th:value="${dosenRec?.getAlamat()}" required />
+                
+                <label for="noHP" class="form-label">No. HP</label>
+                <input type="text" id="noHP" name="noHP" th:value="${dosenRec?.getNoHP()}" required />
+                
+                
+                <div class="action-buttons">
+                    <ul>
+                        <li>
+                            <button type="submit" name="add" class="action-link" id="btn-add">
+                                <i class="fa fa-plus-circle"></i><span>ADD</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button type="submit" name="edit" class="action-link" id="btn-edit">
+                                <i class="fa fa-pencil"></i><span>EDIT</span>
+                            </button>
+                        </li>
+                        <li>
+                            <button type="submit" name="delete" class="action-link" id="btn-delete"
+                                onclick="return confirm('Apakah Anda yakin ingin menghapus data Dosen dengan NIP ' + this.form.nip.value + '?');">
+                                <i class="fa fa-trash-o"></i><span>DELETE</span>
+                            </button>
+                        </li>
+                        <li>
+                            <a th:href="@{/user/dosen}" class="action-link" id="btn-new">
+                                <i class="fa fa-file-o"></i><span>NEW FORM</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/user}" class="action-link" id="btn-return">
+                                <i class="fa fa-reply"></i><span>RETURN</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                </form>
+        </div>
+    </div>
+    
+    <script>
+        feather.replace();
+    </script>
+</body>
+
+</html>
